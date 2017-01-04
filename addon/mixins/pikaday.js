@@ -17,7 +17,7 @@ export default Ember.Mixin.create({
       let options = this._defaultOptions();
 
       if (isPresent(this.get('i18n'))) {
-        if(isPresent(this.get('i18n').t)) {
+        if (isPresent(this.get('i18n').t)) {
           options.i18n = {
             previousMonth : this.get('i18n').t('previousMonth').toString(),
             nextMonth     : this.get('i18n').t('nextMonth').toString(),
@@ -57,7 +57,27 @@ export default Ember.Mixin.create({
       yearRange: this.determineYearRange(),
       minDate: this.get('minDate') || null,
       maxDate: this.get('maxDate') || null,
-      theme: this.get('theme') || null
+      theme: this.get('theme') || null,
+
+      // Options for the time picker
+      // showTime: true,
+      showMinutes: true,
+      showSeconds: false,
+      use24hour: false,
+      incrementHourBy: 1,
+      incrementMinuteBy: 1,
+      incrementSecondBy: 1,
+      autoClose: true,
+      timeLabel: null, // optional string added to left of time select
+      i18n: {
+        previousMonth : 'Previous Month',
+        nextMonth     : 'Next Month',
+        months        : ['January','February','March','April','May','June','July','August','September','October','November','December'],
+        weekdays      : ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
+        weekdaysShort : ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
+        midnight      : 'Midnight',
+        noon          : 'Noon'
+      }
     };
   },
 

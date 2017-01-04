@@ -1,35 +1,16 @@
-[View 1.X CHANGELOG](https://github.com/edgycircle/ember-pikaday/blob/stable-1/CHANGELOG.md)
+## 0.0.4
+- Merge in updates from [@edgycircle/ember-pikaday@2.2.2](https://github.com/edgycircle/ember-pikaday/tree/e2d7335c31b8ad48f312d8c8f283147e700a6b6b)
 
-## 2.2.2
-- Fix infinite rendering invalidation detected (Contribution by [@jedrula](https://github.com/jedrula))
-- Fix 2.12 deprecation of arguments in component life cycle hooks (Contribution by [@leizhao4](https://github.com/leizhao4))
-- Fix enforcing minDate to allow null value (Contribution by [@ilucin](https://github.com/ilucin))
+## 0.0.3
 
-## 2.2.1
-- Enforce current date to be between specified min & max date, also on changes of those (Contribution by [@showy](https://github.com/showy))
-- Replace deprecated `Ember.K` syntax with JavaScript alternative (Contribution by [@locks](https://github.com/locks))
+- Merge in updates from [@edgycircle/ember-pikaday@2.2.2](https://github.com/edgycircle/ember-pikaday)
+- Fix bug with two pickers in the dummy template modifying the same value
 
-## 2.2.0
-- Fix test helper. (Contribution by [@duizendnegen](https://github.com/duizendnegen))
-- Use Pikaday through npm instead of bower. (Contribution by [@josemarluedke](https://github.com/josemarluedke))
-- Fix setting date to wait after min / max date to be updated. (Contribution by [@sl249](https://github.com/sl249))
-- Fix firing min/max date changes. (Contribution by [@patrickberkeley](https://github.com/patrickberkeley))
-- Basic Fastboot compatibility, by merely rendering an input and excluding Pikaday.js in Fastboot mode. (Contribution by [@josemarluedke](https://github.com/josemarluedke))
-- Support for modern `ember-i18n`. (Contribution by [@lcpriest](https://github.com/lcpriest))
+## 0.0.2
+- Fix crash caused by selecting a date before the min date
+- Update all dependencies to latest
+- Remove bower dependencies
+- Use Yarn instead of NPM
 
-## 2.1.0
-- Remove Moment.js deprecation warning due to passed non-parsable arguments. (Contribution by [@mdentremont](https://github.com/mdentremont))
-- Allow binding of `tabindex` attribute. (Contribution by [@FUT](https://github.com/FUT))
-- Add inputless component. (Contribution by [@lan0](https://github.com/lan0))
-
-## 2.0.0
-- Add support for `onOpen`, `onClose` and `onDraw` actions. (Contribution by [@leizhao4](https://github.com/leizhao4))
-
-## 2.0.0-beta.2
-- Passed in values respect `useUTC` setting. (Contribution by [@DanLatimer](https://github.com/DanLatimer))
-- Correctly call `onSelection` action when datepicker is cleared. (Contribution by [@DanLatimer](https://github.com/DanLatimer))
-- Allow binding of `hidden` and `title` attributes. (Contribution by [@ykaragol](https://github.com/ykaragol))
-
-## 2.0.0-beta.1
-- Use the DDAU paradigm prefered by Ember. (Contribution by [@Fed03](https://github.com/Fed03))
-- Support all Pikaday options via an hash. (Contribution by [@Fed03](https://github.com/Fed03))
+## 0.0.1
+- Basic compatibility with the time picker Pikaday fork. (Fork by [@owenmead](https://github.com/owenmead/Pikaday))
