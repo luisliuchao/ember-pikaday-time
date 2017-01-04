@@ -1,17 +1,12 @@
-# ember-pikaday [![Build Status](https://travis-ci.org/edgycircle/ember-pikaday.svg)](https://travis-ci.org/edgycircle/ember-pikaday)
-
-ember-pikaday is an addon that can be installed with Ember CLI. It gives you a datepicker input component that can be used in your Ember.js application. [ember-cli-moment-shim](https://github.com/jasonmit/ember-cli-moment-shim) is used in the background so it is added as NPM dependencies to your application.
-
-**The component provided by ember-pikaday is fully acceptance tested. It also provides test helpers to interact with the datepicker in your own acceptance tests. It works in Ember 1.13.1+ or 2.0+, including beta and canary.**
+# ember-pikaday-time
+ember-pikaday-time is combination of the [Ember Pikaday](https://github.com/edgycircle/ember-pikaday) plugin and a [fork](https://github.com/owenmead/Pikaday) of Pikaday that adds time select support. The following README needs to be updated to accomodate the changes that occured when these two plugins were merged, please take it with a grain of salt.
 
 ## Installation
 
 ```bash
 cd your-project-directory
-ember install ember-pikaday
+ember install ember-pikaday-time
 ```
-
-*This README is for the new 2.X release of ember-pikaday. You can find the [1.X README in the stable-1 branch](https://github.com/edgycircle/ember-pikaday/blob/stable-1/README.md).*
 
 ## Usage
 
