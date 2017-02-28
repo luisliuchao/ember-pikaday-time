@@ -31,3 +31,9 @@ Datepicker already disabled before it's rendered:
 Inputless datepicker:
 {{pikaday-inputless onSelection=(action (mut someDate))}}
 {{someDate}}
+
+<br>
+Datepicker with min and max dates:
+
+{{pikaday-input minDate=minDate maxDate=maxDate value=secondStartDate onSelection=(action (mut secondStartDate)) format='DD.MM.YYYY'}}
+{{secondStartDate}}
