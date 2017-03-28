@@ -15,7 +15,7 @@ export default Ember.Controller.extend({
   }),
   actions: {
     clearStartDate: function() {
-      this.set('startDate', null);
+      this.set('startDate', new Date());
     },
     doSomethingWithSelectedValue(value) {
       console.log(value);
