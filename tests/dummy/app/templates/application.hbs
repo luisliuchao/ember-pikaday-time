@@ -1,39 +1,47 @@
-<h2 id='title'>Welcome to Ember.js</h2>
+<h1>Ember Pikaday Time</h1>
 
-{{outlet}}
-
-Standalone datepicker:
-{{pikaday-input format='dddd MMMM Do YYYY, h:mm:ss a' theme='dark-theme' onSelection=(action 'doSomethingWithSelectedValue')}}
-
-<br>
-
-Datepicker with minDate:
+<h3>Standalone datepicker</h3>
 {{pikaday-input
-  minDate=today
-  value=someDate
-  onSelection=(action (mut someDate))
+  format='dddd MMMM Do YYYY, h:mm:ss a'
+  onSelection=(action 'doSomethingWithSelectedValue')
 }}
 
 <br>
 
-Datepicker with bound and set value:
-{{pikaday-input value=startDate onSelection=(action (mut startDate)) format='DD.MM.YYYY'}}
-{{startDate}}
-<br>
-<button {{action "clearStartDate"}}>Clear Date</button>
-<br>
+<h3>Datepicker with minDate and dark theme</h3>
+{{pikaday-input
+  minDate=today
+  value=someDate
+  onSelection=(action (mut someDate))
+  theme='dark-theme'
+}}
 
-Datepicker already disabled before it's rendered:
+<h3>Datepicker with bound and set value</h3>
+{{pikaday-input
+  value=startDate
+  onSelection=(action (mut startDate))
+  format='DD.MM.YYYY'
+}}
+
+{{startDate}}
+
+<button {{action "clearStartDate"}}>Reset Date</button>
+
+<h3>Datepicker already disabled before it's rendered</h3>
 {{pikaday-input disabled="disabled"}}
 
-<br>
+<h3>Inputless datepicker with dark theme</h3>
+{{pikaday-inputless onSelection=(action (mut otherDate))}}
+{{otherDate}}
 
-Inputless datepicker:
-{{pikaday-inputless onSelection=(action (mut someDate))}}
-{{someDate}}
+<h3>Datepicker with min and max dates</h3>
 
-<br>
-Datepicker with min and max dates:
+{{pikaday-input
+  minDate=minDate
+  maxDate=maxDate
+  value=secondStartDate
+  onSelection=(action (mut secondStartDate))
+  format='DD.MM.YYYY'
+}}
 
-{{pikaday-input minDate=minDate maxDate=maxDate value=secondStartDate onSelection=(action (mut secondStartDate)) format='DD.MM.YYYY'}}
 {{secondStartDate}}

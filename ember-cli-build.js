@@ -15,6 +15,7 @@ module.exports = function(defaults) {
 
   app.import('vendor/pikaday-time/pikaday.js');
   app.import('vendor/pikaday-time/css/pikaday.css');
+  app.import('vendor/pikaday-time/css/theme.css');
 
   return app.toTree();
 };

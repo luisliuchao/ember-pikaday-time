@@ -10,7 +10,7 @@ module.exports = {
         return {
           enabled: process.env.EMBER_CLI_FASTBOOT !== 'true',
           vendor: {
-            include: ['pikaday.js', 'css/pikaday.css']
+            include: ['pikaday.js', 'css/pikaday.css', 'css/theme.css']
           }
         }
       }
