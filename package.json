@@ -3,7 +3,6 @@
   "version": "0.0.3",
   "description": "A tested date and time picker component for Ember CLI projects including test helpers for your own acceptance tests.",
   "directories": {
-    "doc": "doc",
     "test": "tests"
   },
   "scripts": {
@@ -11,9 +10,9 @@
     "start": "ember server",
     "test": "ember try:each"
   },
-  "repository": "https://github.com/Inkstone-Inc/ember-pikaday-time",
+  "repository": "https://github.com/helm-inc/ember-pikaday-time",
   "engines": {
-    "node": ">= 4"
+    "node": ">= 6"
   },
   "author": "Robert Benjamin",
   "license": "MIT",
@@ -43,7 +42,9 @@
   "keywords": [
     "ember-addon",
     "pikaday",
-    "datepicker"
+    "datepicker",
+    "timepicker",
+    "datetimepicker"
   ],
   "dependencies": {
     "ember-cli-babel": "^5.1.6",
