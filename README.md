@@ -1,4 +1,7 @@
 # ember-pikaday-time
+
+![Demo App](demo.png)
+
 ember-pikaday-time is combination of the [Ember Pikaday](https://github.com/edgycircle/ember-pikaday) plugin and a [fork](https://github.com/owenmead/Pikaday) of Pikaday that adds time select support. The following README needs to be updated to accomodate the changes that occured when these two plugins were merged, please take it with a grain of salt.
 
 ## Installation
