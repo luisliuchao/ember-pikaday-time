@@ -1,3 +1,6 @@
+## 0.0.5
+- Merge in updates from [@edgycircle/ember-pikaday@2.2.3](https://github.com/edgycircle/ember-pikaday/tree/acaa267ed7688c9b0cda1e462048c564480e61ef)
+
 ## 0.0.4
 - Merge in updates from [@edgycircle/ember-pikaday@2.2.2](https://github.com/edgycircle/ember-pikaday/tree/e2d7335c31b8ad48f312d8c8f283147e700a6b6b)
 
