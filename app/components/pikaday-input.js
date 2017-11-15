@@ -1,4 +1,1 @@
-import Ember from 'ember';
-import PikadayInputComponent from 'ember-pikaday/components/pikaday-input';
-
-export default PikadayInputComponent;
+export { default } from 'ember-pikaday/components/pikaday-input';

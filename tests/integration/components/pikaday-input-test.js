@@ -1,14 +1,8 @@
+import { run } from '@ember/runloop';
 import { moduleForComponent, test } from 'ember-qunit';
 import hbs from 'htmlbars-inline-precompile';
 import { openDatepicker } from 'ember-pikaday/helpers/pikaday';
-import Ember from 'ember';
 import $ from 'jquery';
-
-const later = Ember.run.later;
-
-const {
-  run,
-} = Ember;
 
 const getFirstWeekendDayNumber = function() {
   let date = new Date();
@@ -23,20 +17,7 @@ function closePikaday(context) {
 }
 
 moduleForComponent('pikaday-input', 'Integration | Component | pikaday input', {
-  integration: true,
-  beforeEach() {
-    Ember.run.later = function(ctx, fn) {
-      if (typeof fn === 'function') {
-        Ember.run.bind(ctx, fn)();
-      } else {
-        ctx();
-      }
-    };
-  },
-
-  afterEach() {
-    Ember.run.later = later;
-  },
+  integration: true
 });
 
 test('it is an input tag', function(assert) {

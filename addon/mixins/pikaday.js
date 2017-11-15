@@ -1,63 +1,62 @@
 /* globals Pikaday */
-import Ember from 'ember';
+import Mixin from '@ember/object/mixin';
+
+import { assign } from '@ember/polyfills';
+import { isPresent } from '@ember/utils';
+import { run } from '@ember/runloop';
+import { getProperties, computed, get, set } from '@ember/object';
 import moment from 'moment';
 
-const {
-  isPresent,
-  run,
-  getProperties
-} = Ember;
+// const assign = assign || merge;
 
-const assign = Ember.assign || Ember.merge;
+export default Mixin.create({
 
-export default Ember.Mixin.create({
-
-  _options: Ember.computed('options', 'i18n', {
+  _options: computed('options', 'i18n', {
     get() {
       let options = this._defaultOptions();
 
-      if (isPresent(this.get('i18n'))) {
-        if (isPresent(this.get('i18n').t)) {
+      if (isPresent(get(this, 'i18n'))) {
+        if (isPresent(get(this, 'i18n').t)) {
           options.i18n = {
-            previousMonth : this.get('i18n').t('previousMonth').toString(),
-            nextMonth     : this.get('i18n').t('nextMonth').toString(),
-            months        : this.get('i18n').t('months').toString().split(','),
-            weekdays      : this.get('i18n').t('weekdays').toString().split(','),
-            weekdaysShort : this.get('i18n').t('weekdaysShort').toString().split(',')
+            previousMonth : get(this, 'i18n').t('previousMonth').toString(),
+            nextMonth     : get(this, 'i18n').t('nextMonth').toString(),
+            months        : get(this, 'i18n').t('months').toString().split(','),
+            weekdays      : get(this, 'i18n').t('weekdays').toString().split(','),
+            weekdaysShort : get(this, 'i18n').t('weekdaysShort').toString().split(',')
           };
         } else {
-          options.i18n = this.get('i18n');
+          options.i18n = get(this, 'i18n');
         }
       }
-      if (isPresent(this.get('position'))) {
-        options.position = this.get('position');
+      if (isPresent(get(this, 'position'))) {
+        options.position = get(this, 'position');
       }
-      if (isPresent(this.get('reposition'))) {
-        options.reposition = this.get('reposition');
+      if (isPresent(get(this, 'reposition'))) {
+        options.reposition = get(this, 'reposition');
       }
 
-      assign(options, this.get('options') || {});
+      assign(options, get(this, 'options') || {});
       return options;
     }
   }),
 
   _defaultOptions() {
-    const firstDay = this.get('firstDay');
+    const firstDay = get(this, 'firstDay');
 
     return {
-      field: this.get('field'),
-      container: this.get('pikadayContainer'),
-      bound: this.get('pikadayContainer') ? false : true,
+      field: get(this, 'field'),
+      container: get(this, 'pikadayContainer'),
+      bound: get(this, 'pikadayContainer') ? false : true,
       onOpen: run.bind(this, this.onPikadayOpen),
       onClose: run.bind(this, this.onPikadayClose),
       onSelect: run.bind(this, this.onPikadaySelect),
       onDraw: run.bind(this, this.onPikadayRedraw),
       firstDay: (typeof firstDay !== 'undefined') ? parseInt(firstDay, 10) : 1,
-      format: this.get('format') || 'DD.MM.YYYY',
+      format: get(this, 'format') || 'DD.MM.YYYY',
       yearRange: this.determineYearRange(),
-      minDate: this.get('minDate') || null,
-      maxDate: this.get('maxDate') || null,
-      theme: this.get('theme') || null,
+      minDate: get(this, 'minDate') || null,
+      maxDate: get(this, 'maxDate') || null,
+      theme: get(this, 'theme') || null,
 
       // Options for the time picker
       // showTime: true,
@@ -93,7 +92,7 @@ export default Ember.Mixin.create({
       this.setMaxDate();
       this.setPikadayDate();
 
-      if (this.get('options')) {
+      if (get(this, 'options')) {
         this._updateOptions();
       }
     });
@@ -105,27 +104,27 @@ export default Ember.Mixin.create({
   },
 
   setupPikaday() {
-    let pikaday = new Pikaday(this.get('_options'));
+    let pikaday = new Pikaday(get(this, '_options'));
 
-    this.set('pikaday', pikaday);
+    set(this, 'pikaday', pikaday);
     this.setPikadayDate();
   },
 
   willDestroyElement() {
     this._super(...arguments);
-    this.get('pikaday').destroy();
+    get(this, 'pikaday').destroy();
   },
 
   setPikadayDate: function() {
     const format = 'YYYY-MM-DD';
-    const value = this.get('value');
+    const value = get(this, 'value');
 
     if (!value) {
-      this.get('pikaday').setDate(value, true);
+      get(this, 'pikaday').setDate(value, true);
     } else {
-      const date = this.get('useUTC') ? moment(moment.utc(value).format(format), format).toDate() : value;
+      const date = get(this, 'useUTC') ? moment(moment.utc(value).format(format), format).toDate() : value;
 
-      this.get('pikaday').setDate(date, true);
+      get(this, 'pikaday').setDate(date, true);
     }
   },
 
@@ -175,21 +174,21 @@ export default Ember.Mixin.create({
   },
 
   onPikadayRedraw: function() {
-    this.get('onDraw')();
+    get(this, 'onDraw')();
   },
 
   userSelectedDate: function() {
-    var selectedDate = this.get('pikaday').getDate();
+    var selectedDate = get(this, 'pikaday').getDate();
 
-    if (this.get('useUTC')) {
+    if (get(this, 'useUTC')) {
       selectedDate = moment.utc([selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()]).toDate();
     }
 
-    this.get('onSelection')(selectedDate);
+    get(this, 'onSelection')(selectedDate);
   },
 
   determineYearRange: function() {
-    var yearRange = this.get('yearRange');
+    var yearRange = get(this, 'yearRange');
 
     if (yearRange) {
       if (yearRange.indexOf(',') > -1) {
@@ -209,12 +208,12 @@ export default Ember.Mixin.create({
   },
 
   autoHideOnDisabled() {
-    if (this.get('disabled') && this.get('pikaday')) {
-      this.get('pikaday').hide();
+    if (get(this, 'disabled') && get(this, 'pikaday')) {
+      get(this, 'pikaday').hide();
     }
   },
 
   _updateOptions() {
-    this.get('pikaday').config(this.get('_options'));
+    get(this, 'pikaday').config(get(this, '_options'));
   }
 });

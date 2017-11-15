@@ -1,3 +1,8 @@
+## 0.0.6
+- Update to the new module syntax as per [RFC #176](https://github.com/emberjs/rfcs/blob/master/text/0176-javascript-module-api.md) of Ember 2.16
+- Remove `ember-cli-shims`
+- Add stricter linting rules from [eslint-plugin-ember](https://github.com/ember-cli/eslint-plugin-ember)
+
 ## 0.0.5
 - Merge in updates from [@edgycircle/ember-pikaday@2.2.3](https://github.com/edgycircle/ember-pikaday/tree/acaa267ed7688c9b0cda1e462048c564480e61ef)
 - Update all dependencies

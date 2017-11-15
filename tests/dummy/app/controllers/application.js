@@ -1,10 +1,10 @@
-/* eslint no-console: 0 */
-import Ember from 'ember';
+/* eslint-disable no-console, ember/alias-model-in-controller */
+import { computed } from '@ember/object';
 
-export default Ember.Controller.extend({
-  startDate: new Date(),
-  minDate: new Date(),
-  maxDate: Ember.computed('startDate', function() {
+import Controller from '@ember/controller';
+
+export default Controller.extend({
+  maxDate: computed('startDate', function() {
     let maxDate = new Date();
     let startDate = this.get('startDate');
     maxDate.setDate(startDate.getDate() + 7);
@@ -13,12 +13,16 @@ export default Ember.Controller.extend({
     maxDate.setSeconds(59);
     return maxDate;
   }),
+
   actions: {
-    clearStartDate: function() {
+    clearStartDate() {
       this.set('startDate', new Date());
     },
     doSomethingWithSelectedValue(value) {
       console.log(value);
     }
   },
+
+  startDate: new Date(),
+  minDate: new Date()
 });
