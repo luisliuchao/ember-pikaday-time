@@ -2,15 +2,13 @@
 import Ember from 'ember';
 import moment from 'moment';
 
-const {
-  isPresent,
-  run,
-  getProperties
-} = Ember;
+const { isPresent, run, getProperties } = Ember;
 
 const assign = Ember.assign || Ember.merge;
 
 export default Ember.Mixin.create({
+  showTime: false,
+  use24hour: true,
 
   _options: Ember.computed('options', 'i18n', {
     get() {
@@ -19,11 +17,24 @@ export default Ember.Mixin.create({
       if (isPresent(this.get('i18n'))) {
         if (isPresent(this.get('i18n').t)) {
           options.i18n = {
-            previousMonth : this.get('i18n').t('previousMonth').toString(),
-            nextMonth     : this.get('i18n').t('nextMonth').toString(),
-            months        : this.get('i18n').t('months').toString().split(','),
-            weekdays      : this.get('i18n').t('weekdays').toString().split(','),
-            weekdaysShort : this.get('i18n').t('weekdaysShort').toString().split(',')
+            previousMonth: this.get('i18n')
+              .t('previousMonth')
+              .toString(),
+            nextMonth: this.get('i18n')
+              .t('nextMonth')
+              .toString(),
+            months: this.get('i18n')
+              .t('months')
+              .toString()
+              .split(','),
+            weekdays: this.get('i18n')
+              .t('weekdays')
+              .toString()
+              .split(','),
+            weekdaysShort: this.get('i18n')
+              .t('weekdaysShort')
+              .toString()
+              .split(',')
           };
         } else {
           options.i18n = this.get('i18n');
@@ -52,7 +63,7 @@ export default Ember.Mixin.create({
       onClose: run.bind(this, this.onPikadayClose),
       onSelect: run.bind(this, this.onPikadaySelect),
       onDraw: run.bind(this, this.onPikadayRedraw),
-      firstDay: (typeof firstDay !== 'undefined') ? parseInt(firstDay, 10) : 1,
+      firstDay: typeof firstDay !== 'undefined' ? parseInt(firstDay, 10) : 1,
       format: this.get('format') || 'DD.MM.YYYY',
       yearRange: this.determineYearRange(),
       minDate: this.get('minDate') || null,
@@ -60,33 +71,54 @@ export default Ember.Mixin.create({
       theme: this.get('theme') || null,
 
       // Options for the time picker
-      // showTime: true,
+      showTime: get(this, 'showTime'),
       showMinutes: true,
       showSeconds: false,
-      use24hour: false,
+      use24hour: get(this, 'use24hour'),
       incrementHourBy: 1,
       incrementMinuteBy: 1,
       incrementSecondBy: 1,
-      autoClose: true,
+      autoClose: !get(this, 'showTime'),
       timeLabel: null, // optional string added to left of time select
       i18n: {
-        previousMonth : 'Previous Month',
-        nextMonth     : 'Next Month',
-        months        : ['January','February','March','April','May','June','July','August','September','October','November','December'],
-        weekdays      : ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'],
-        weekdaysShort : ['Sun','Mon','Tue','Wed','Thu','Fri','Sat'],
-        midnight      : 'Midnight',
-        noon          : 'Noon'
+        previousMonth: 'Previous Month',
+        nextMonth: 'Next Month',
+        months: [
+          'January',
+          'February',
+          'March',
+          'April',
+          'May',
+          'June',
+          'July',
+          'August',
+          'September',
+          'October',
+          'November',
+          'December'
+        ],
+        weekdays: [
+          'Sunday',
+          'Monday',
+          'Tuesday',
+          'Wednesday',
+          'Thursday',
+          'Friday',
+          'Saturday'
+        ],
+        weekdaysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
+        midnight: 'Midnight',
+        noon: 'Noon'
       }
     };
   },
 
-	/**
-	 * When updating attrs, we need to reset some things in case they've changed.
-	 * @public
-	 * @memberOf {Mixins.Pikaday}
-	 * @return {undefined}
-	 */
+  /**
+   * When updating attrs, we need to reset some things in case they've changed.
+   * @public
+   * @memberOf {Mixins.Pikaday}
+   * @return {undefined}
+   */
   didUpdateAttrs() {
     run.later(() => {
       this.setMinDate();
@@ -117,20 +149,23 @@ export default Ember.Mixin.create({
   },
 
   setPikadayDate: function() {
-    const format = 'YYYY-MM-DD';
     const value = this.get('value');
 
     if (!value) {
       this.get('pikaday').setDate(value, true);
     } else {
-      const date = this.get('useUTC') ? moment(moment.utc(value).format(format), format).toDate() : value;
+      const date = this.get('useUTC') ? moment.utc(value).toDate() : value;
 
       this.get('pikaday').setDate(date, true);
     }
   },
 
   setMinDate: function() {
-    const { pikaday, minDate, value } = getProperties(this, [ 'pikaday', 'minDate', 'value' ]);
+    const { pikaday, minDate, value } = getProperties(this, [
+      'pikaday',
+      'minDate',
+      'value'
+    ]);
 
     if (minDate) {
       minDate.setSeconds(0);
@@ -148,7 +183,11 @@ export default Ember.Mixin.create({
   },
 
   setMaxDate: function() {
-    const { pikaday, maxDate, value }  = getProperties(this, [ 'pikaday', 'maxDate', 'value' ]);
+    const { pikaday, maxDate, value } = getProperties(this, [
+      'pikaday',
+      'maxDate',
+      'value'
+    ]);
 
     if (maxDate) {
       maxDate.setSeconds(0);
@@ -182,7 +221,17 @@ export default Ember.Mixin.create({
     var selectedDate = this.get('pikaday').getDate();
 
     if (this.get('useUTC')) {
-      selectedDate = moment.utc([selectedDate.getFullYear(), selectedDate.getMonth(), selectedDate.getDate()]).toDate();
+      if (get(this, 'showTime')) {
+        selectedDate = moment.utc(selectedDate).toDate();
+      } else {
+        selectedDate = moment
+          .utc([
+            selectedDate.getFullYear(),
+            selectedDate.getMonth(),
+            selectedDate.getDate()
+          ])
+          .toDate();
+      }
     }
 
     this.get('onSelection')(selectedDate);
