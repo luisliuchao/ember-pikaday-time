@@ -79,7 +79,7 @@ export default Ember.Mixin.create({
       incrementMinuteBy: 1,
       incrementSecondBy: 1,
       autoClose: !get(this, 'showTime'),
-      timeLabel: null, // optional string added to left of time select
+      timeLabel: get(this, 'timeLabel') || 'Select Time', // optional string added to left of time select
       i18n: {
         previousMonth: 'Previous Month',
         nextMonth: 'Next Month',
